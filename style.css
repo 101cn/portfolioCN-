@@ -466,7 +466,7 @@ p {
 }
 
 /* Clickable Images & Canvases */
-.carousel-item img, .text-content img, canvas {
+.carousel-item img, .text-content img, .gallery-item, canvas {
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
     -webkit-user-select: none; /* Disables Safari Live Text overlays */
@@ -474,7 +474,7 @@ p {
     position: relative;
     display: block;
 }
-.carousel-item img:hover, .text-content img:hover, canvas:hover {
+.carousel-item img:hover, .text-content img:hover, .gallery-item:hover, canvas:hover {
     transform: scale(1.02);
     z-index: 10;
 }
