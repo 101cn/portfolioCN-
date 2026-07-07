@@ -465,11 +465,13 @@ p {
     text-decoration: none;
 }
 
-/* Clickable Images */
-.carousel-item img, .text-content img {
+/* Clickable Images & Canvases */
+.carousel-item img, .text-content img, canvas {
     cursor: pointer;
     transition: transform 0.2s;
+    -webkit-user-select: none; /* Disables Safari Live Text overlays */
+    user-select: none;
 }
-.carousel-item img:hover, .text-content img:hover {
+.carousel-item img:hover, .text-content img:hover, canvas:hover {
     transform: scale(1.02);
 }

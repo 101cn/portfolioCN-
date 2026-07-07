@@ -131,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.tagName === 'IMG' && !e.target.classList.contains('lightbox-content')) {
             modal.style.display = 'flex';
             modalImg.src = e.target.src;
+        } else if (e.target.tagName === 'CANVAS') {
+            modal.style.display = 'flex';
+            modalImg.src = e.target.toDataURL("image/png");
         }
     });
 
