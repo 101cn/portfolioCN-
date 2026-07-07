@@ -1,0 +1,153 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Chandrahas Nalabotu} \\ \vspace{5pt}
+    \small \faEnvelope \hspace{2pt} \href{mailto:101chandrahas@gmail.com}{\underline{101chandrahas@gmail.com}} $|$ 
+    \faLink \hspace{2pt} \href{https://101cn.github.io/portfolioCN-/}{\underline{101cn.github.io/portfolioCN-/}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Leicester}{2024 -- Present}
+      {Mechanical Engineering MEng}{}
+      \resumeItemListStart
+        \resumeItem{Year 1 and 2 - 1st}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Work Experience / Projects}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Aerolabs CFD Analyst / Avionics Engineer -- UAS Challenge}{September 2025 -- Present}
+      {CFD and Electronic Framework}{}
+      \resumeItemListStart
+        \resumeItem{Ran 3D CFD simulations in STAR-CCM+ on a drone airframe, increasing lift coefficient from 1.0 to 1.6 by adding secondary flaps, enabling lower minimum flight speed.}
+        \resumeItem{Reduced CFD simulation runtime from 6 hours to $\sim$2 hours by tuning solver settings and convergence criteria under senior team member guidance.}
+        \resumeItem{Configured flight controller optimising control delivery and sensitivity.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Innex1 Rover - Lunabotics 2026}{September 2025 -- Present}
+      {Software \& Electrical Architecture}{}
+      \resumeItemListStart
+        \resumeItem{Built a 5-topic ROS2 architecture with dedicated bridges for drivetrain, excavation and actuator subsystems, reducing controller input to rover response latency from 2.5s to 0.6s and enabling controller teleoperation via Pygame.}
+        \resumeItem{Reduced live camera feed latency from 30s to $\sim$1s at 40Hz through bandwidth reduction over a ROS2/WebSocket pipeline to mission control.}
+        \resumeItem{Designed fail-closed motion safety logic with a 200ms stale-command timeout and stall-detection encoder verification to prevent uncontrolled spinning under low traction.}
+        \resumeItem{Separated 60A motor power and 15A compute power domains with independent fusing and a fault-latching E-stop circuit, preserving telemetry and compute uptime during an E-stop event.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Surgical Instrument Carrier -- Rover Delivery}{September 2025 -- March 2026}
+      {Hardware \& Firmware Engineering}{}
+      \resumeItemListStart
+        \resumeItem{Reduced electronics expenditure by $\sim$30\% by designing three distinct hardware subsystems (drive, indication, and servo) using off-the-shelf Arduino UNOs in EasyEDA rather than manufacturing custom PCBs.}
+        \resumeItem{Achieved autonomous line-following capabilities by writing C++ control logic that continuously processed IR and Time-of-Flight sensor data to regulate dual brushed DC drive motors.}
+        \resumeItem{Integrated a centralized firmware architecture across 3 separate hardware modules, successfully synchronizing the autonomous drive systems with the servo-actuated payload delivery mechanism.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Single Axis Stabilizer}{September 2023 -- May 2024}
+      {NEA Coursework}{}
+      \resumeItemListStart
+        \resumeItem{Engineered a single-axis camera mount that actively counteracts external disturbance using IMU feedback while enabling continuous 360$^\circ$ rotation, controlled via Arduino.}
+        \resumeItem{Reduced angular tracking error by 30\% and eliminated dropped interrupts by refactoring open-source stabilization control code.}
+        \resumeItem{Designed mechanical housing and PCB layout using Fusion 360 and EasyEDA, standardizing hole and via sizing to meet manufacturing tolerances.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Software}{: Solidworks, Fusion 360, Excel, STAR CCM+} \\
+     \textbf{Coding / Frameworks}{: Python, Arduino, C++, MATLAB, Simulink, ROS2, Linux distributions} \\
+     \textbf{Manufacturing}{: 3D prints, lathe, laser cutter, soldering, standard workshop machining equipment}
+    }}
+ \end{itemize}
+
+\end{document}
