@@ -178,12 +178,10 @@
                                                     <!-- Top layer: Sensors / Perception -->
                                                     <div class="ros-branches">
                                                         <div class="ros-node">
-                                                            <span class="icon">📷</span>
                                                             <span class="label">lunabot_perception</span>
                                                             <div class="ros-dialogue">Processes raw OAK-D depth streams to dynamically mask lunar craters, preventing the rover from falling into hazardous holes.</div>
                                                         </div>
                                                         <div class="ros-node">
-                                                            <span class="icon">📡</span>
                                                             <span class="label">lunabot_localisation</span>
                                                             <div class="ros-dialogue">Filters 3D Ouster LiDAR pointclouds via C++ to strip out illegal out-of-arena boundary points before mapping.</div>
                                                         </div>
@@ -196,7 +194,6 @@
                                             
                                                     <!-- Middle layer: Navigation -->
                                                     <div class="ros-node root" style="width: 100%; max-width: 320px;">
-                                                        <span class="icon">🗺️</span>
                                                         <span class="label">lunabot_navigation (Nav2)</span>
                                                         <div class="ros-dialogue">Consumes the cleaned LiDAR and camera feeds to build a 3D Voxel Costmap, autonomously generating obstacle-free paths.</div>
                                                     </div>
@@ -208,7 +205,6 @@
                                             
                                                     <!-- Safety layer -->
                                                     <div class="ros-node highlight" style="width: 100%; max-width: 320px;">
-                                                        <span class="icon">🛡️</span>
                                                         <span class="label">velocity_gate (Interceptor)</span>
                                                         <div class="ros-dialogue" style="border-left-color: #ef4444;">Acts as a fail-closed interceptor. Snaps shut if commands go stale for >200ms or if the physical E-Stop interrupts the heartbeat.</div>
                                                     </div>
@@ -221,12 +217,10 @@
                                                     <!-- Hardware layer -->
                                                     <div class="ros-branches">
                                                         <div class="ros-node">
-                                                            <span class="icon">⚙️</span>
                                                             <span class="label">lunabot_drivetrain</span>
                                                             <div class="ros-dialogue">Bridges the safe ROS commands to the Teensy/Sabertooth controllers, executing physical motor actuation.</div>
                                                         </div>
                                                         <div class="ros-node">
-                                                            <span class="icon">⛏️</span>
                                                             <span class="label">lunabot_excavation</span>
                                                             <div class="ros-dialogue">Manages the Cytron Action Server to precisely control the linear actuators and 3-phase digging motors.</div>
                                                         </div>
