@@ -1,0 +1,408 @@
+:root {
+    --bg-color: #121212; /* Very dark background */
+    --card-bg: #1e1e1e; /* Lighter dark gray for cards */
+    --text-color: #ffffff;
+    --text-muted: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%; /* Spans the entire screen width */
+    margin: 0 auto;
+    padding: 0 2rem; /* Matches the blue line limit on the right */
+}
+
+section {
+    padding: 2rem 0;
+}
+
+.header-section {
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+}
+
+.header-name {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Ensures the gap is perfectly centered on the screen */
+    gap: 3rem;
+    align-items: start;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 16px; /* Rounded corners like the screenshot */
+    padding: 2.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Subtle depth */
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    /* Lines removed as requested */
+}
+
+p {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+    color: #eeeeee;
+}
+
+.resume-container {
+    width: 100%; /* Spans the full width of its half */
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+#resume-canvas {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Views and Fading Animation */
+.views-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: start;
+}
+
+.view {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.view.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+/* Subtitles and Typography */
+.slide-subtitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    display: block;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.slide-subtitle[href]:hover {
+    color: var(--text-color);
+}
+
+.text-content {
+    margin-top: 2rem;
+}
+
+/* Interactive Sliders */
+.slider-container {
+    position: relative;
+    width: 250px;
+    height: 44px;
+    margin: 1.5rem auto;
+}
+
+.slider-track {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.05);
+    border-radius: 22px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    pointer-events: none; /* Let the invisible input catch clicks */
+}
+
+.slider-pill {
+    position: absolute;
+    top: 2px; left: 2px;
+    width: calc(50% - 4px);
+    height: calc(100% - 4px);
+    background: var(--text-color);
+    border-radius: 20px;
+    /* transition will be applied via JS when snapping */
+}
+
+.slider-label {
+    flex: 1;
+    text-align: center;
+    z-index: 2;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.1s ease;
+}
+
+.slider-input {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Mini Slider (3rd Level) */
+.mini-slider {
+    width: 100%;
+    max-width: 450px;
+    height: 38px;
+    margin: 0 0 1.5rem 0; /* Align left with margin bottom */
+}
+.mini-track {
+    border-radius: 19px;
+}
+.mini-pill {
+    border-radius: 17px;
+}
+.mini-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Dragging state overrides */
+.view.dragging, .nested-view.dragging {
+    visibility: visible !important;
+    transition: none !important;
+}
+
+/* Gallery Styles */
+.gallery-container {
+    width: 100%;
+    min-height: 500px;
+    border: 2px dashed #444;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.gallery-placeholder {
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    align-items: start;
+}
+
+.gallery-grid-full {
+    grid-template-columns: 1fr !important;
+}
+
+.gallery-item {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
+    background: rgba(255,255,255,0.02);
+}
+
+.gallery-pdf {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1200px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Nested Views */
+.nested-views-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: start;
+    width: 100%;
+}
+
+.nested-view {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.nested-view.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* --- ROS 2 Node Tree --- */
+.ros-tree-container {
+    padding: 2rem;
+    background: var(--surface-light);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ros-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.ros-branches {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.ros-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.ros-node {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.ros-dialogue {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    text-align: left;
+    border-left: 3px solid #3b82f6;
+}
+
+.ros-node:hover {
+    transform: translateY(-2px);
+    border-color: #3b82f6;
+}
+
+.ros-node.root {
+    max-width: 250px;
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.ros-node.highlight {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.ros-node .icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.ros-node .label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.ros-node .label small {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.ros-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    padding: 0.25rem 0;
+    line-height: 1;
+}
+
+.ros-arrow .topic-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: var(--text-color);
+}
