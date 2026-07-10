@@ -137,8 +137,10 @@
                                 <!-- UAS DRONE PROJECT -->
                                 <div id="proj-text-uas" class="nested-view">
                                     <h2>UAS Drone</h2>
-                                    
-                                    <div class="slider-container mini-slider" id="uas-slider">
+                                    <div class="text-content" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+                                        <p>The primary objective for the UAS Challenge was to design a drone capable of autonomously flying over a large field and evenly spraying water. Because full automation awarded significantly more points than manual control, our design needed to be highly stable and capable of flying at extremely low speeds to ensure the payload was distributed evenly.</p>
+                                    </div>
+                                    <div class="mini-slider slider-container" id="uas-slider">
                                         <div class="slider-track mini-track">
                                             <div class="slider-pill mini-pill" id="uas-pill"></div>
                                             <div class="slider-label mini-label" id="uas-label-l">CFD</div>
@@ -149,13 +151,21 @@
 
                                     <div class="nested-views-container">
                                         <div id="uas-text-cfd" class="nested-view active">
-                                            <div class="text-content" style="margin-top: 0; text-align: center; padding: 3rem 0;">
-                                                <h3 style="color: var(--text-color); opacity: 0.5;">WIP</h3>
+                                            <div class="text-content" style="margin-top: 1rem; margin-bottom: 2.5rem;">
+                                                <h3 style="margin-top: 0; margin-bottom: 0.5rem; color: var(--text-color);">Aerodynamic Modifications</h3>
+                                                <p>To achieve the required water distribution rate, the drone had to fly at roughly half of its originally designed cruising speed. At these low velocities, the original airframe would have stalled and crashed. To solve this, I modeled the airframe in STAR-CCM+ and ran intensive 3D CFD simulations. By designing and integrating secondary flaps, I successfully increased the drone's lift coefficient from 1.0 to 1.6, preventing stall conditions and enabling a much lower minimum flight speed.</p>
+
+                                                <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color);">Simulation Optimization</h3>
+                                                <p>One of the biggest hurdles during this aerodynamic testing was computational bottlenecking. Initial CFD simulations were taking up to 6 hours to run. I had to carefully balance mathematical accuracy with computational time. By meticulously customizing meshing behaviors, refining fluid boundary layers, and tuning the solver's convergence criteria, I managed to reduce the simulation runtime down to just 2 hours without sacrificing critical aerodynamic data.</p>
                                             </div>
                                         </div>
                                         <div id="uas-text-avi" class="nested-view">
-                                            <div class="text-content" style="margin-top: 0; text-align: center; padding: 3rem 0;">
-                                                <h3 style="color: var(--text-color); opacity: 0.5;">WIP</h3>
+                                            <div class="text-content" style="margin-top: 1rem; margin-bottom: 2.5rem;">
+                                                <p>The drone's electronics and autonomous logic were driven by a Cube Orange flight controller. We integrated an RX module to allow for manual override signals via our remote controller, but the primary focus was on achieving high-scoring autonomous flight.</p>
+
+                                                <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color);">Flight Control & Tuning</h3>
+                                                <p>Integrating the hardware was straightforward, but tuning the flight controller proved to be a massive challenge due to mechanical imperfections in our airframe. First, the drone utilized an H-tail configuration where one rudder piece was slightly offset, causing the drone to naturally drift into a slight turn. Secondly, the drone relied on a single propeller without a counter-rotating prop to cancel out the torque, inducing a continuous clockwise roll.</p>
+                                                <p>To compensate for this behaviour without mechanically rebuilding the tail, I had to deeply configure the flight controller's sensitivity and control delivery. I utilized my background in control theory to program continuous anti-clockwise roll trims and rudder offsets directly into the firmware. Fighting mechanical issues with software is notoriously difficult and yielded inconsistent results under varying wind conditions.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -268,14 +278,14 @@
                                         <div id="uas-gallery-cfd" class="nested-view active">
                                             <div class="gallery-container" style="display: flex; justify-content: center; align-items: center; min-height: 250px;">
                                                 <div class="gallery-placeholder" style="border: none; background: transparent;">
-                                                    <h2 style="color: var(--text-color); opacity: 0.5;">WIP</h2>
+                                                    <h2 style="color: var(--text-color); opacity: 0.5;">COMING SOON...</h2>
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="uas-gallery-avi" class="nested-view">
                                             <div class="gallery-container" style="display: flex; justify-content: center; align-items: center; min-height: 250px;">
                                                 <div class="gallery-placeholder" style="border: none; background: transparent;">
-                                                    <h2 style="color: var(--text-color); opacity: 0.5;">WIP</h2>
+                                                    <h2 style="color: var(--text-color); opacity: 0.5;">COMING SOON...</h2>
                                                 </div>
                                             </div>
                                         </div>
