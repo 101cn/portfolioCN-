@@ -60,14 +60,16 @@
 
                 <!-- VIEW 2: PROJECTS -->
                 <div id="view-projects" class="view">
-                    <div class="slider-container" id="sub-slider" style="margin-bottom: 3rem; margin-top: -3.5rem; width: 300px;">
+                    <div class="slider-container" id="sub-slider" style="margin-bottom: 3rem; margin-top: -3.5rem; width: 420px;">
                         <div class="slider-track">
                             <div class="slider-pill" id="sub-pill"></div>
                             <div class="slider-label" id="sub-label-l">Innex1 Rover</div>
-                            <div class="slider-label" id="sub-label-r">UAS Drone</div>
+                            <div class="slider-label" id="sub-label-m">UAS Drone</div>
+                            <div class="slider-label" id="sub-label-r">SIC Rover</div>
                         </div>
                         <input type="range" class="slider-input" id="sub-input" min="0" max="100" value="0">
                     </div>
+                    <div id="sub-timespan" class="timespan-label">September 2025 - Present</div>
 
                     <div class="split-layout">
                         <div class="card left-column">
@@ -96,7 +98,7 @@
                                                 <h3 style="margin-top: 0; margin-bottom: 0.5rem; color: var(--text-color);">Electrical Architecture</h3>
                                                 <p>In terms of electronic structure, I designed two isolated systems to prioritize simplicity and reliability: a <strong>power domain</strong> (upper schematic) and a <strong>compute domain</strong> (lower schematic). By splitting the architecture across two separate batteries, I avoided the heavy complications and inefficiencies of excessively stepping voltages up or down across the entire rover.</p>
                                                 <p>The power domain runs off a high-capacity 6S 22.2V LiPo battery. It handles all high-current loads, including the 4 drivetrain motors, 4 linear actuators, and the 3-phase brushless excavation motor, distributing power through an 80A ANL fuse and dedicated Cytron motor controllers.</p>
-                                                <p>The compute domain is powered independently by a 4S 14.8V battery. It utilizes two custom step-down buck converters to provide stable 12V/5A and 5V/10A rails. This ensures reliable, uninterrupted power delivery to the Jetson Nano, LiDAR L1r, dual OAK-D depth cameras, microcontroller, and the GL-iNet router, preventing brownouts during heavy motor loads.</p>
+                                                <p>The compute domain is powered independently by a 4S 14.8V battery. It utilizes two custom step-down buck converters to provide stable 12V/5A and 5V/10A rails. This ensures reliable, uninterrupted power delivery to the Jetson Nano, LiDAR L1r, dual OAK-D depth cameras, microcontroller, and the GL-iNet router, preventing burnouts during heavy motor loads.</p>
                                                 <p>Both domains were built with modularity in mind, using XT90/XT60 terminals and Wago connectors to allow for rapid hot-swapping and maintenance during the competition.</p>
                                                 
                                                 <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color);">Electrical Safety</h3>
@@ -118,6 +120,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- SIC ROVER PROJECT -->
+                                <div id="proj-text-sic" class="nested-view">
+                                    <h2>SIC Rover</h2>
+                                    <div class="text-content" style="margin-top: 1rem; margin-bottom: 2.5rem;">
+                                        <p>The Surgical Instrument Carrier (SIC) Rover was designed as an autonomous prototype capable of transporting payload boxes and deploying them at specific off track target locations. My responsibility was to design the electrical architecture and code in the autonomy.</p>
+                                        
+                                        <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color);">Component Selection & Electronics</h3>
+                                        <p>Working within strict budget constraints, one of the main challenges was equipment selection. I had to source highly specific, cost effective components that could still meet the rigorous performance specifications calculated by my fellow engineers. Instead of manufacturing custom PCBs, I designed three distinct hardware subsystems (drive, indication and servo) utilizing off the shelf arduino UNOs integrated via EasyEDA.</p>
+                                        
+                                        <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-color);">Firmware & Autonomous Control</h3>
+                                        <p>The most technically demanding aspect of the project was achieving reliable automation on single threaded arduino microcontrollers. Because the rover relied on continuous IR sensor data to follow a black line, it couldn't simply pause to execute other tasks. To solve this, I architected a custom interrupt driven control loop.</p>
+                                        <p>By heavily optimizing the system's tick rate, the firmware could instantaneously process Time of Flight distance measurements and trigger the servo actuated payload dropoffs without ever interrupting the drive motors. This ensured the rover could reliably corner and maintain the line while simultaneously managing its delivery sequence.</p>
+                                    </div>
+                                </div>
                                 <!-- UAS DRONE PROJECT -->
                                 <div id="proj-text-uas" class="nested-view">
                                     <h2>UAS Drone</h2>
@@ -133,14 +149,13 @@
 
                                     <div class="nested-views-container">
                                         <div id="uas-text-cfd" class="nested-view active">
-                                            <div class="text-content" style="margin-top: 0;">
-                                                <p>Ran 3D CFD simulations in STAR-CCM+ on a drone airframe, increasing lift coefficient from 1.0 to 1.6 by adding secondary flaps.</p>
-                                                <p>Reduced CFD simulation runtime from 6 hours to ~2 hours by tuning solver settings and convergence criteria.</p>
+                                            <div class="text-content" style="margin-top: 0; text-align: center; padding: 3rem 0;">
+                                                <h3 style="color: var(--text-color); opacity: 0.5;">WIP</h3>
                                             </div>
                                         </div>
                                         <div id="uas-text-avi" class="nested-view">
-                                            <div class="text-content" style="margin-top: 0;">
-                                                <p>Details about the Avionics and control for the UAS Drone go here.</p>
+                                            <div class="text-content" style="margin-top: 0; text-align: center; padding: 3rem 0;">
+                                                <h3 style="color: var(--text-color); opacity: 0.5;">WIP</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -239,20 +254,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- SIC ROVER GALLERY -->
+                                <div id="proj-gallery-sic" class="nested-view">
+                                    <div class="gallery-grid">
+                                        <img class="gallery-item" src="projects/SIC rover/drive motor setup.png" alt="Drive Motor Setup">
+                                        <img class="gallery-item" src="projects/SIC rover/drop off setup.png" alt="Drop Off Setup">
+                                        <img class="gallery-item" src="projects/SIC rover/indication and sensors setup.png" alt="Indication and Sensors Setup">
+                                    </div>
+                                </div>
                                 <!-- UAS DRONE GALLERY -->
                                 <div id="proj-gallery-uas" class="nested-view">
                                     <div class="nested-views-container">
                                         <div id="uas-gallery-cfd" class="nested-view active">
-                                            <div class="gallery-container">
-                                                <div class="gallery-placeholder">
-                                                    <p><i>UAS Drone CFD pictures will be displayed here.</i></p>
+                                            <div class="gallery-container" style="display: flex; justify-content: center; align-items: center; min-height: 250px;">
+                                                <div class="gallery-placeholder" style="border: none; background: transparent;">
+                                                    <h2 style="color: var(--text-color); opacity: 0.5;">WIP</h2>
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="uas-gallery-avi" class="nested-view">
-                                            <div class="gallery-container">
-                                                <div class="gallery-placeholder">
-                                                    <p><i>UAS Drone Avionics diagrams will be displayed here.</i></p>
+                                            <div class="gallery-container" style="display: flex; justify-content: center; align-items: center; min-height: 250px;">
+                                                <div class="gallery-placeholder" style="border: none; background: transparent;">
+                                                    <h2 style="color: var(--text-color); opacity: 0.5;">WIP</h2>
                                                 </div>
                                             </div>
                                         </div>

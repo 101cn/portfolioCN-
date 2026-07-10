@@ -108,6 +108,8 @@ p {
     width: 100%;
     opacity: 0;
     visibility: hidden;
+    height: 0;
+    overflow: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
     z-index: 1;
     pointer-events: none;
@@ -116,6 +118,8 @@ p {
 .view.active {
     opacity: 1;
     visibility: visible;
+    height: auto;
+    overflow: visible;
     z-index: 2;
     pointer-events: auto;
 }
@@ -207,6 +211,8 @@ p {
 /* Dragging state overrides */
 .view.dragging, .nested-view.dragging {
     visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
     transition: none !important;
 }
 
@@ -277,6 +283,8 @@ p {
     width: 100%;
     opacity: 0;
     visibility: hidden;
+    height: 0;
+    overflow: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1;
     pointer-events: none;
@@ -285,6 +293,8 @@ p {
 .nested-view.active {
     opacity: 1;
     visibility: visible;
+    height: auto;
+    overflow: visible;
     z-index: 2;
     pointer-events: auto;
 }
@@ -477,4 +487,14 @@ p {
 .carousel-item img:hover, .text-content img:hover, .gallery-item:hover, canvas:hover {
     transform: scale(1.02);
     z-index: 10;
+}
+
+/* Timespan Label */
+.timespan-label {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    font-style: italic;
 }
