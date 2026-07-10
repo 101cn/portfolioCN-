@@ -38,31 +38,28 @@ function initializeSlider(sliderContainerId, viewsArrays = [], onChangeCallback 
             }
         });
 
-        if (!isSnapping && viewsArrays.length > 0) {
-            viewsArrays.forEach(views => {
-                if (views.length === numLabels) {
-                    views.forEach((view, i) => {
-                        if (!view) return;
-                        const snapPoint = i * segmentSize;
-                        const distance = Math.abs(val - snapPoint);
-                        let opacity = 1 - (distance / segmentSize);
-                        if (opacity < 0) opacity = 0;
-                        
-                        view.style.opacity = opacity;
-                        if (opacity > 0 && opacity < 1) {
-                            view.classList.add('dragging');
-                        } else {
-                            view.classList.remove('dragging');
-                        }
-                    });
-                }
-            });
-        }
     }
 
     input.addEventListener('input', () => {
         if (!isDragging) return;
         updateSlider(false);
+
+        const val = parseInt(input.value);
+        const segmentSize = 100 / (numLabels - 1);
+        const isSnapped = (val % segmentSize === 0);
+
+        if (viewsArrays.length > 0) {
+            viewsArrays.forEach(views => {
+                if (views.length === numLabels) {
+                    views.forEach(view => {
+                        if (!view) return;
+                        if (view.classList.contains('active')) {
+                            view.style.opacity = isSnapped ? '1' : '0';
+                        }
+                    });
+                }
+            });
+        }
     });
 
     input.addEventListener('change', () => {
@@ -75,16 +72,19 @@ function initializeSlider(sliderContainerId, viewsArrays = [], onChangeCallback 
         if (viewsArrays.length > 0) {
             viewsArrays.forEach(views => {
                 if (views.length === numLabels) {
-                    views.forEach((view, i) => {
+                    views.forEach(view => {
                         if (!view) return;
-                        view.classList.remove('dragging');
-                        view.style.opacity = '';
-                        if (i === currentIndex) {
-                            view.classList.add('active');
-                        } else {
-                            view.classList.remove('active');
-                        }
+                        view.classList.remove('active');
+                        view.style.opacity = '0';
                     });
+                    
+                    const newView = views[currentIndex];
+                    if (newView) {
+                        newView.classList.add('active');
+                        setTimeout(() => {
+                            newView.style.opacity = '1';
+                        }, 50);
+                    }
                 }
             });
         }
