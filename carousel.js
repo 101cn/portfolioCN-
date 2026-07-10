@@ -11,11 +11,59 @@ function initializeSlider(sliderContainerId, viewsArrays = [], onChangeCallback 
 
     let isDragging = false;
     let lastIndex = -1;
+    let transitionTimeout1 = null;
+    let transitionTimeout2 = null;
 
     input.addEventListener('mousedown', () => isDragging = false);
     input.addEventListener('mousemove', () => isDragging = true);
     input.addEventListener('touchstart', () => isDragging = false);
     input.addEventListener('touchmove', () => isDragging = true);
+
+    function switchView(oldIndex, newIndex) {
+        if (viewsArrays.length === 0) return;
+        
+        clearTimeout(transitionTimeout1);
+        clearTimeout(transitionTimeout2);
+
+        viewsArrays.forEach(views => {
+            if (views.length === numLabels) {
+                if (oldIndex >= 0 && views[oldIndex]) {
+                    views[oldIndex].style.opacity = '0';
+                }
+                views.forEach((v, i) => {
+                    if (v && i !== oldIndex && i !== newIndex) {
+                        v.style.opacity = '0';
+                        v.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        transitionTimeout1 = setTimeout(() => {
+            viewsArrays.forEach(views => {
+                if (views.length === numLabels) {
+                    if (oldIndex >= 0 && views[oldIndex]) {
+                        views[oldIndex].classList.remove('active');
+                    }
+                    const newView = views[newIndex];
+                    if (newView) {
+                        newView.classList.add('active');
+                    }
+                }
+            });
+
+            transitionTimeout2 = setTimeout(() => {
+                viewsArrays.forEach(views => {
+                    if (views.length === numLabels) {
+                        const newView = views[newIndex];
+                        if (newView) {
+                            newView.style.opacity = '1';
+                        }
+                    }
+                });
+            }, 30);
+        }, 250);
+    }
 
     function updateSlider(isSnapping = false) {
         const val = input.value;
@@ -27,6 +75,25 @@ function initializeSlider(sliderContainerId, viewsArrays = [], onChangeCallback 
 
         if (currentIndex !== lastIndex) {
             if (onChangeCallback) onChangeCallback(currentIndex);
+            if (lastIndex !== -1) {
+                switchView(lastIndex, currentIndex);
+            } else {
+                viewsArrays.forEach(views => {
+                    if (views.length === numLabels) {
+                        views.forEach((v, i) => {
+                            if (v) {
+                                if (i === currentIndex) {
+                                    v.classList.add('active');
+                                    v.style.opacity = '1';
+                                } else {
+                                    v.classList.remove('active');
+                                    v.style.opacity = '0';
+                                }
+                            }
+                        });
+                    }
+                });
+            }
             lastIndex = currentIndex;
         }
 
@@ -37,58 +104,18 @@ function initializeSlider(sliderContainerId, viewsArrays = [], onChangeCallback 
                 label.style.color = 'var(--text-muted)';
             }
         });
-
     }
 
     input.addEventListener('input', () => {
         if (!isDragging) return;
         updateSlider(false);
-
-        const val = parseInt(input.value);
-        const segmentSize = 100 / (numLabels - 1);
-        const isSnapped = (val % segmentSize === 0);
-
-        if (viewsArrays.length > 0) {
-            viewsArrays.forEach(views => {
-                if (views.length === numLabels) {
-                    views.forEach(view => {
-                        if (!view) return;
-                        if (view.classList.contains('active')) {
-                            view.style.opacity = isSnapped ? '1' : '0';
-                        }
-                    });
-                }
-            });
-        }
     });
 
     input.addEventListener('change', () => {
         const segmentSize = 100 / (numLabels - 1);
         const currentIndex = Math.round(input.value / segmentSize);
         input.value = currentIndex * segmentSize;
-        
         pill.style.transition = 'left 0.3s ease';
-        
-        if (viewsArrays.length > 0) {
-            viewsArrays.forEach(views => {
-                if (views.length === numLabels) {
-                    views.forEach(view => {
-                        if (!view) return;
-                        view.classList.remove('active');
-                        view.style.opacity = '0';
-                    });
-                    
-                    const newView = views[currentIndex];
-                    if (newView) {
-                        newView.classList.add('active');
-                        setTimeout(() => {
-                            newView.style.opacity = '1';
-                        }, 50);
-                    }
-                }
-            });
-        }
-        
         updateSlider(true);
         setTimeout(() => { pill.style.transition = 'none'; }, 300);
     });
